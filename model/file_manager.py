@@ -39,7 +39,7 @@ class FileManager:
         except FileNotFoundError:
             data = []
 
-        data = [obj for obj in data if obj['id'].replace("-", "") != id]
+        data = [obj for obj in data if obj["id"].replace("-", "") != id]
 
         with open(self.file_name, "w") as f:
             json.dump(data, f)

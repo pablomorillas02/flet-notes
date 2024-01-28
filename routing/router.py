@@ -3,7 +3,7 @@ from views.index import Index
 from views.add import Add
 from views.settings import Settings
 
-def views_handler(page, rebuild_index):
+def views_handler(page, rebuild_index, id):    
     # Creación de vistas
     index = Index(page, rebuild_index)
     add = Add(page)
@@ -29,5 +29,5 @@ def views_handler(page, rebuild_index):
             route="/settings",
             appbar=settings.build_appbar(),
             controls=settings.build_controls()
-        )
+        ),
     }

@@ -85,6 +85,10 @@ class Index(ft.UserControl):
         
         self.rebuild_index()
 
+    # Función para editar una nota
+    def edit_note(self, e, id):
+        self.page.go("/edit/" + str(id))
+
     def build_controls(self):
         controls = [
             lv := ft.ListView(
@@ -99,6 +103,11 @@ class Index(ft.UserControl):
                         trailing=ft.PopupMenuButton(
                             icon=ft.icons.MORE_VERT,
                             items=[
+                                ft.PopupMenuItem(
+                                    text="Editar",
+                                    icon=ft.icons.EDIT,
+                                    on_click=lambda e, id=note.get_id(): self.edit_note(e, id)
+                                ),
                                 ft.PopupMenuItem(
                                     text="Borrar",
                                     icon=ft.icons.DELETE,
