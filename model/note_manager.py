@@ -24,6 +24,14 @@ class NoteManager:
         self.notes = [note for note in self.notes if note.get_id() != id]
         self.manager.delete_note(id)
 
+    def edit_note(self, id, new_title, new_content):
+        for note in self.notes:
+            if note.get_id() == id:
+                note.set_title(new_title)
+                note.set_contenido(new_content)
+
+        self.manager.edit_note(id, new_title, new_content)
+                
     def get_notes(self):
         return self.notes
     

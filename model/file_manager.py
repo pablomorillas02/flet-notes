@@ -43,3 +43,18 @@ class FileManager:
 
         with open(self.file_name, "w") as f:
             json.dump(data, f)
+
+    def edit_note(self, id, new_title, new_content):
+        try:
+            with open(self.file_name, "r") as f:
+                data = json.load(f)
+        except FileNotFoundError:
+            data = []
+
+        for obj in data:
+            if obj["id"].replace("-", "") == id:
+                obj["title"] = new_title
+                obj["content"] = new_content
+
+        with open(self.file_name, "w") as f:
+            json.dump(data, f)

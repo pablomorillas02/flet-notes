@@ -6,6 +6,7 @@ class Index(ft.UserControl):
         super().__init__()
         self.page = page
         self.rebuild_index = rebuild_index
+        self.dlg_modal = None 
 
     def build_drawer(self):
         drawer = ft.NavigationDrawer(
@@ -85,9 +86,70 @@ class Index(ft.UserControl):
         
         self.rebuild_index()
 
+    ## Cerrar el modal
+    def close_modal(self, e):
+        self.dlg_modal.open = False
+        self.page.update()
+
+    ## Manda la edición
+    def confirm_edit(self, e, id, new_title, new_content):
+        notes.edit_note(id, new_title, new_content)
+        self.close_modal(e)
+        self.rebuild_index()
+
+    def get_note_by_id(self, id):
+        for note in notes.get_notes():
+            if note.get_id() == id:
+                return note
+
     # Función para editar una nota
     def edit_note(self, e, id):
-        self.page.go("/edit/" + str(id))
+        note = self.get_note_by_id(id)
+
+        ## Campos de entrada
+        title_field = ft.TextField(
+                        label="Título de la nota",
+                        value=note.get_title(),
+                        multiline=False,
+                        border=ft.InputBorder.OUTLINE,
+                        border_color=ft.colors.ON_SURFACE_VARIANT
+                    )
+        content_field = ft.TextField(
+                            label= "Contenido de la nota...",
+                            value=note.get_contenido(),
+                            multiline=True,
+                            border=ft.InputBorder.OUTLINE,
+                            border_color=ft.colors.ON_SURFACE_VARIANT
+                    )
+
+        ## Ventana para editar la nota
+        self.dlg_modal = ft.AlertDialog(
+            modal=True,
+            title=ft.Text("Editando nota..."),
+            content=ft.Column(
+                controls=[
+                    title_field,
+                    ft.Divider(),
+                    content_field
+                ],
+            ),
+            actions=[
+                ft.TextButton(
+                    content=ft.Text(
+                        "Cancelar",
+                        color=ft.colors.ON_SURFACE_VARIANT
+                    ) ,
+                    on_click=self.close_modal
+                ),
+                ft.TextButton("Confirmar", on_click=lambda e: self.confirm_edit(e, id, title_field.value, content_field.value)),
+            ],
+            actions_alignment=ft.MainAxisAlignment.END,
+        )
+
+        self.page.dialog = self.dlg_modal
+        self.dlg_modal.open = True
+        self.page.update()
+                
 
     def build_controls(self):
         controls = [
