@@ -2,6 +2,10 @@
 
 Esta aplicación es un clon sencillo de una aplicación para crear notas. Cada nota cuenta con un **título** y el propio **contenido** de la nota. Además he añadido un poco de personalización de la interfaz de usuario.
 
+(A la hora de elegir color se ve un poco raro en la grabación, al usar la app de forma normal funciona de manera fluida)
+
+https://github.com/pablomorillas02/flet-notes/assets/114686516/10ea83f0-bfb8-42e0-8a82-556f6f7775b5
+
 ## Instalación
 
 Para poder ejecutar la aplicación, tendréis que instalar las dependencias del archivo _requierements.txt_ haciendo uso del siguiente comando:
