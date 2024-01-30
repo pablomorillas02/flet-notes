@@ -6,8 +6,8 @@ class Settings(ft.UserControl):
     def __init__(self, page):
         super().__init__()
         self.page = page
-        self.color_picker = ColorPicker(color=color)
-        self.switch_mode = False if page.theme_mode == ft.ThemeMode.DARK else True
+        self.color_picker = ColorPicker(color=color) 
+        self.switch_mode = False if self.page.theme_mode == ft.ThemeMode.DARK else True
 
     def change_theme(self, e):
         self.page.theme_mode = (
@@ -15,6 +15,13 @@ class Settings(ft.UserControl):
             if self.page.theme_mode == ft.ThemeMode.LIGHT
             else ft.ThemeMode.LIGHT
         )
+
+        with open("./storage/theme_settings.txt", "w") as f:
+            if self.page.theme_mode == ft.ThemeMode.DARK:
+                f.writelines("DARK")
+
+            if self.page.theme_mode ==ft.ThemeMode.LIGHT:
+                f.writelines("LIGHT")
 
         self.page.update()
 

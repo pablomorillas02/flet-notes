@@ -33,6 +33,6 @@ Esta aplicación todavía no está acabada, faltan algunas cosas por añadir:
 - [x] Personalización de UI
 - [x] Persistencia de notas
 - [x] Persistencia de configuración de personalización
-- [ ] Editar notas
+- [x] Editar notas
 
 Estas son algunas de las cosas que considero básicas, luego quizás haga algo más conforme me vaya a mi apeteciendo.

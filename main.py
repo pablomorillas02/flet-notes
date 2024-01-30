@@ -10,7 +10,16 @@ def main(page: ft.Page):
     page.title = "Notas!"
 
     # Tema
-    page.theme_mode = ft.ThemeMode.SYSTEM # Tema del sistema
+    with open("storage/theme_settings.txt", "r") as f:
+        theme = f.readline()
+
+    if theme:
+        if theme == "DARK":
+            page.theme_mode = ft.ThemeMode.DARK
+        if theme == "LIGHT":
+            page.theme_mode = ft.ThemeMode.LIGHT
+    else:
+        page.theme_mode = ft.ThemeMode.SYSTEM # Tema del sistema
 
     # Scroll
     page.auto_scroll = False
