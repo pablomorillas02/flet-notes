@@ -161,7 +161,7 @@ class Index(ft.UserControl):
                         leading=ft.Icon(ft.icons.NOTE),
                         title=ft.Text(note.get_title()),
                         subtitle=ft.Text(note.get_contenido()),
-                        on_click=lambda e: self.get_note(e, note.get_title(), note.get_contenido()),
+                        on_click=lambda e, title=note.get_title(), content=note.get_contenido(): self.get_note(e, title, content),
                         trailing=ft.PopupMenuButton(
                             icon=ft.icons.MORE_VERT,
                             items=[
